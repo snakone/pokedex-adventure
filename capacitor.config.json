@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "Pokedex Adventure",
+	"appId": "io.ionic.pokedex.adventure.com",
+	"appName": "Pokédex Adventure",
 	"webDir": "www",
 	"bundledWebRuntime": false
 }
