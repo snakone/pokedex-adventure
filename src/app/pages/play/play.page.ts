@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { DUMMY_POKEMON } from 'src/app/shared/dummy/pokemon.dummy';
-import { Pokemon } from 'src/app/shared/interfaces/pokemon.interface';
+import { Component } from '@angular/core';
+import { LOCATION_MENU } from 'src/app/shared/data/menu';
+import { DUMMY_POKEDEX } from 'src/app/shared/dummy/pokemon.dummy';
+import { LocationMenu } from 'src/app/shared/interfaces/menu.interface';
+import { GameLocation, Pokemon } from 'src/app/shared/interfaces/pokemon.interface';
 
 @Component({
   selector: 'pokedex-play',
@@ -8,28 +10,40 @@ import { Pokemon } from 'src/app/shared/interfaces/pokemon.interface';
   styleUrls: ['play.page.scss']
 })
 
-export class PlayPage implements OnInit {
+export class PlayPage {
 
   current: Pokemon;
-  pokeList = DUMMY_POKEMON;
+  pokedex = DUMMY_POKEDEX;
   show = false;
   rolls = 10;
   playing = false;
   gameList: Pokemon[] = [];
 
+  location: GameLocation = DUMMY_POKEDEX[0].locations[0];
+  region = 'Kanto'
+
+  menu = LOCATION_MENU;
+
   constructor() {}
 
-  ngOnInit() { }
+  ionViewDidEnter(){
+    this.reset(true);
+  }
 
   public doRoll(): void {
-    this.playing = true;
     if (this.rolls <= 0) { return; }
+
+    this.playing = true;
     this.show = false;
-    this.rolls--;
+ 
     const random = Math.round((Math.random() * 1000));
-    this.current = this.closest(random, this.pokeList);
+
+    this.current = this.closest(random, this.location.list);
     this.gameList.push(this.current);
+    this.rolls--;
+
     setTimeout(() => this.show = true, 100);
+
     setTimeout(() => {
       new Audio('assets/sounds/' + 
                 this.current.name.toLowerCase() + 
@@ -47,15 +61,35 @@ export class PlayPage implements OnInit {
         if (aDiff == bDiff) {
             return a.rate > b.rate ? a : b;
         } else {
-            return (bDiff < aDiff && random <= b.rate) ? b : a;
+            return random >= a.rate ? b : 
+              (bDiff < aDiff && random <= b.rate ? b : a);
         }
     });
   }
 
-  public reset(): void {
-    this.rolls = 10;
+  public changeLocation(
+    r: LocationMenu,
+    l: { location: string }
+  ): void {
+    this.region = r.name;
+    this.reset(true);
+    this.location = this.pokedex.filter(p => p.region === r.name)
+                                .map(p => p.locations)[0]
+                                .filter(loc => loc.name === l.location)[0];
+  }
+
+  public reset(soft: boolean = false): void {
+    if (soft) {
+      this.show = false;
+      this.current = undefined;
+      this.playing = false;
+      return;
+    }
+
     this.show = false;
     this.current = undefined;
+    this.playing = false;
+    this.rolls = 10;
     this.gameList = [];
   }
 
