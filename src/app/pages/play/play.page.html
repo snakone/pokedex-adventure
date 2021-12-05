@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Play
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <section>
+    <div class="info">
+      <div *ngIf="show" class="animated fadeIn">
+        {{current.name}} salvaje apareció!
+      </div>
+    </div>
+    <div class="game">
+      <img src="assets/img/models/1-gen/{{current.image}}"
+           class="animated backInRight"
+           *ngIf="show"
+           [style.transform]="'scale(' + current.scale + ')'"/>
+    </div>
+    <div class="actions">
+      <ion-button shape="round"
+                  color="success" 
+                  (click)="doRoll()"
+                  [disabled]="rolls <= 0 || playing">Rolls: {{rolls}}
+      </ion-button>
+      <ion-button shape="round"
+                  color="warning" 
+                  (click)="share()"
+                  [disabled]="rolls == 10">Share
+      </ion-button>
+      <ion-button shape="round"
+                  color="danger"
+                  fill="outline" 
+                  (click)="reset()"
+                  [disabled]="rolls == 10">Reset
+      </ion-button>
+    </div>
+  </section>
+</ion-content>
