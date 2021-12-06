@@ -12,6 +12,7 @@ export interface Pokemon {
   max: number;
   seen?: boolean;
   catch?: boolean;
+  route?: string;
 }
 
 export interface Pokedex {

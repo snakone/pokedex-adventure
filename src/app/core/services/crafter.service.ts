@@ -32,6 +32,24 @@ export class CrafterService {
     return alert;
   }
 
+  public async confirm(message: string, header: string): Promise<any> {
+    const alert = await this.alertCtrl.create({
+      header,
+      message,
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        { text: 'OK' }
+      ]
+    });
+
+    alert.present();
+    return alert.onDidDismiss();
+  }
+
   public dismissModal(): void {
     this.modalCtrl.dismiss();
   }

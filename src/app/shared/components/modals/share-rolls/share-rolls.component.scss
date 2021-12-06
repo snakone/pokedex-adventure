@@ -14,7 +14,17 @@ ion-button {
 
 ion-item {
   --padding-start: 2px;
-  --padding-end: 10px;
+  --padding-end: 8px;
+
+  & ion-label {
+    position: relative;
+    top: 3px;
+    left: 5px;
+
+    & p {
+      margin-top: 2px;
+    }
+  }
 }
 
 ion-avatar {
@@ -22,6 +32,8 @@ ion-avatar {
 }
 
 ion-list {
+  padding: 0;
+
   & ion-buttons ion-icon {
     font-size: 1.3rem;
     margin-left: 18px;

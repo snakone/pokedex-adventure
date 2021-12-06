@@ -59,6 +59,7 @@ export class PlayPage {
     const pokemon = this.closest(random, this.location.list);
     pokemon.pc = Math.floor(Math.random() * 
                 (pokemon.max - pokemon.min)) + pokemon.min;
+    pokemon.route = this.location.name;
     this.gameList.push({...pokemon});
     return pokemon;
   }

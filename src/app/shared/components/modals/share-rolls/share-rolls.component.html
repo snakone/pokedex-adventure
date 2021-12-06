@@ -15,12 +15,16 @@
 <ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let poke of list; let i = index" 
-                      lines="full">
+                      lines="full"
+                      #slider>
       <ion-item>
         <ion-avatar>
           <ion-img [src]="'assets/img/sprites/' + poke.pokedex + '.png'"></ion-img>
         </ion-avatar>
-        <ion-label><strong>{{poke.name}}</strong> - PC {{poke.pc}}</ion-label>
+        <ion-label>
+          <strong>{{poke.name}}</strong>
+          <p>PC {{poke.pc}} - {{poke.route}}</p>
+        </ion-label>
         <ion-buttons slot="end">
           <ion-icon [ngClass]="{'disabled': !poke.catch}" 
                     src="assets/img/icons/pokeball.svg">
@@ -30,7 +34,7 @@
 
       <ion-item-options side="end">
         <ion-item-option color="danger" 
-                        (click)="delete(i)">
+                        (click)="delete(i, slider)">
           <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
@@ -41,6 +45,7 @@
 <ion-footer class="ion-no-border">
   <ion-button expand="full" 
               color="success"
+              [disabled]="list.length <= 0"
               (click)="share()">Share
   </ion-button>
 </ion-footer>

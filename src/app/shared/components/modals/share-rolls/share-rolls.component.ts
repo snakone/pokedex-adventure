@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CrafterService } from '@core/services/crafter.service';
+import { IonItemSliding } from '@ionic/angular';
 
 import { Pokemon } from '@shared/interfaces/pokemon.interface';
 
@@ -27,8 +28,20 @@ export class ShareRollsComponent {
     alert.onDidDismiss().then(_ => this.close());
   }
 
-  public delete(index: number): void {
-    this.list = this.list.filter((_, i) => i !== index);
+  public async delete(
+    index: number,
+    slider: IonItemSliding
+  ): Promise<void> {
+    const { role } = await this.crafter.confirm(
+      'Do you want to remove this Pokémon?',
+      'Remove ' + this.list[index].name
+    );
+
+    if (!role) {
+      this.list = this.list.filter((_, i) => i !== index);
+    } else {
+      slider.close();
+    }
   }
 
 }
