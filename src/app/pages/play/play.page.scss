@@ -3,125 +3,18 @@ section {
   height: 100%;
   display: grid;
   align-items: center;
-  grid-template-rows: 1fr 2fr 1.2fr;
-  overflow-y: scroll;
+  grid-template-rows: .8fr 2.2fr .8fr;
   overflow-x: hidden;
 
-  & .info {
-    text-align: center;
-    background: #dbf4fa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  & pokedex-play-info, 
+    pokedex-play-game,
+    pokedex-play-actions {
     height: 100%;
   }
-
-  & .game {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    min-height: 300px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    & img {
-      max-width: 160px;
-      transform-origin: 50% 50%;
-      transition: all 300ms;
-      position: relative;
-    }
-
-    & ion-chip {
-      --background: white;
-    }
-
-    & .types {
-      position: absolute;
-      bottom: 10px;
-    }
-  }
-}
-
-ion-item {
-  transition: all 100ms ease-in-out;
-
-  &.active-parent {
-    --background: #333;
-    --color: #EEE;
-  }
-}
-
-ion-list {
-  padding: 0;
-}
-
-ion-menu ion-icon {
-  margin-inline-end: 16px;
 }
 
 ion-router-outlet {
   z-index: -1;
-}
-
-ion-button {
-  display: block;
-  max-width: 50%;
-  margin: 0 auto 15px auto;
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
-}
-
-ion-col.show {
-  min-height: 28px;
-  margin-top: 10px;
-}
-
-ion-grid {
-  & .region {
-    background: var(--ion-color-warning);
-  }
-
-  & .location {
-    background: var(--ion-color-secondary);
-  }
-}
-
-
-ion-chip {
-  border: 1px solid rgba(0 , 0, 0, .3);
-
-  &.Normal {
-    background: rgb(168, 168, 120);
-    color: #eee;
-  }
-
-  &.Flying {
-    background: rgb(168, 144, 240);
-    color: #eee;
-  }
-
-  &.Bug {
-    background: rgb(168, 184, 32);
-    color: #eee;
-  }
-
-  &.Electric {
-    background: rgb(248, 208, 48);
-    color: #333;
-  }
-
-  &.Steel {
-    background: rgb(184, 184, 208);
-    color: #333;
-  }
 }
 
 

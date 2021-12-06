@@ -1,0 +1,33 @@
+<ion-menu side="start" 
+          menuId="locations" 
+          contentId="locations">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-title>Select Location</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ng-container *ngFor="let i of menu; let last = last">
+      <ion-item lines="full" 
+                (click)="i.open = !i.open" 
+                [class.active-parent]="i.open">
+                <ion-icon slot="start" 
+                          size="small" 
+                          [name]="i.open ? 'arrow-down' : 'arrow-forward'"
+                          [color]="i.open ?? 'medium'">
+                </ion-icon>
+                <ion-label>{{i.name}}</ion-label>
+      </ion-item>
+      <ion-list *ngIf="i.open" class="animated fadeIn">
+        <ion-menu-toggle *ngFor="let c of i.child">
+          <ion-item button 
+                    detail 
+                    lines="full" 
+                    (click)="changeLocation(i, c.location)">
+            <ion-label>{{c.location}}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ng-container>
+  </ion-content>
+</ion-menu>

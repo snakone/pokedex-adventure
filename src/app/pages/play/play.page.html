@@ -1,111 +1,36 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Adventure
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="secondary">
-          <ion-menu-button menu="locations"></ion-menu-button>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<pokedex-header title="Adventure" 
+              menu="locations">
+</pokedex-header>
 
 <ion-content [fullscreen]="true">
   <section>
-    <div class="info">
-      <div>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12">
-              <ion-chip class="region">
-                <ion-icon src="assets/img/icons/region.svg"></ion-icon>
-                <ion-label color="dark">{{region}}</ion-label>
-              </ion-chip>
-              <ion-chip class="location">
-                <ion-icon src="assets/img/icons/location.svg"></ion-icon>
-                <ion-label color="light">{{location.name}}</ion-label>
-              </ion-chip>
-            </ion-col>
-            <ion-col class="show">
-              <ion-label *ngIf="!playing && show" 
-                          class="animated fadeIn">
-                  A wild <strong>{{current.name}}</strong> appeared!
-              </ion-label>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-    </div>
-    <div class="game" [ngStyle]="{'background-image': 'url('+ 'assets/img/battle/bg/' + location.background + ')'}">
-      <ng-container *ngIf="show">
-        <img src="assets/img/models/1-gen/{{current.image}}"
-            class="animated backInRight"
-            [style.transform]="'scale(' + current.scale + ')'" 
-            [ngStyle]="{'top': current.spacing || 0}"/>
-            <div class="animated fadeIn types" *ngIf="!playing">
-              <ion-chip [class]="current.type1">
-                <ion-label>{{current.type1}}</ion-label>
-              </ion-chip>
-              <ion-chip *ngIf="current.type2"
-                        [class]="current.type2">
-                <ion-label>{{current.type2}}</ion-label>
-              </ion-chip>
-            </div>
-      </ng-container>
-    </div>
-    <div class="actions">
-      <ion-button shape="round"
-                  color="success" 
-                  (click)="doRoll()"
-                  [disabled]="rolls <= 0 || playing">Rolls: {{rolls}}
-      </ion-button>
-      <!-- <ion-button shape="round"
-                  color="warning" 
-                  (click)="share()"
-                  [disabled]="rolls == 10">Share
-      </ion-button> -->
-      <ion-button shape="round"
-                  color="danger"
-                  fill="outline" 
-                  (click)="reset()"
-                  [disabled]="rolls == 10 || playing">Reset
-      </ion-button>
-    </div>
+    <pokedex-play-info [pokemon]="pokemon"
+                       [region]="region"
+                       [location]="location"
+                       [playing]="playing"
+                       [show]="show">
+    </pokedex-play-info>
+
+    <pokedex-play-game [pokemon]="pokemon"
+                       [location]="location"
+                       [playing]="playing"
+                       [show]="show">
+    </pokedex-play-game>
+
+    <pokedex-play-actions [rolls]="rolls"
+                          [pokeballs]="pokeballs"
+                          [playing]="playing"
+                          [show]="show"
+                          (onRoll)="doRoll()"
+                          (onPokeball)="doPokeball()"
+                          (onShare)="share()"
+                          (onReset)="reset()">
+    </pokedex-play-actions>
   </section>
 </ion-content>
 
-<ion-menu side="start" menuId="locations" contentId="locations">
-  <ion-header>
-    <ion-toolbar color="secondary">
-      <ion-title>Select Location</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ng-container *ngFor="let i of menu; let last = last">
-      <ion-item lines="full" 
-                (click)="i.open = !i.open" 
-                [class.active-parent]="i.open">
-                <ion-icon slot="start" 
-                          size="small" 
-                          [name]="i.open ? 'arrow-down' : 'arrow-forward'"
-                          [color]="i.open ?? 'medium'">
-                </ion-icon>
-                <ion-label>{{i.name}}</ion-label>
-      </ion-item>
-      <ion-list *ngIf="i.open" class="animated fadeIn">
-        <ion-menu-toggle *ngFor="let c of i.child">
-          <ion-item button 
-                    detail 
-                    lines="full" 
-                    (click)="changeLocation(i, c)">
-            <ion-label>{{c.location}}</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-      </ion-list>
-    </ng-container>
-  </ion-content>
-</ion-menu>
+<pokedex-play-menu (onChangeLocation)="changeLocation($event)">
+</pokedex-play-menu>
 
 <ion-router-outlet id="locations"></ion-router-outlet>
 

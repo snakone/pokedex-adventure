@@ -1,0 +1,34 @@
+ion-chip {
+  border: 1px solid rgba(0 , 0, 0, .3);
+  font-weight: bold;
+
+  &.Normal {
+    background: rgb(168, 168, 120);
+    color: #eee;
+  }
+
+  &.Flying {
+    background: rgb(168, 144, 240);
+    color: #eee;
+  }
+
+  &.Bug {
+    background: rgb(168, 184, 32);
+    color: #eee;
+  }
+
+  &.Electric {
+    background: rgb(248, 208, 48);
+    color: #333;
+  }
+
+  &.Steel {
+    background: rgb(184, 184, 208);
+    color: #333;
+  }
+}
+
+ion-app {
+  max-width: 550px;
+  margin: 0 auto;
+}

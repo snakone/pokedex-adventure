@@ -3,3 +3,8 @@ export interface LocationMenu {
   child: { location: string }[];
   open: boolean;
 }
+
+export interface LocationChange {
+  menu: LocationMenu,
+  location: string
+}

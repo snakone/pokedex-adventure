@@ -16,13 +16,13 @@ export const LOCATION_MENU: LocationMenu[] = [
     ],
     open: false
   },
-  {
-    name: 'Johto',
-    child: [
-      {
-        location: 'Route 29'
-      }
-    ],
-    open: false
-  }
+  // {
+  //   name: 'Johto',
+  //   child: [
+  //     {
+  //       location: 'Route 29'
+  //     }
+  //   ],
+  //   open: false
+  // }
 ];

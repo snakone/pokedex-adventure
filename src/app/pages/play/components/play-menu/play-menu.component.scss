@@ -1,0 +1,16 @@
+ion-item {
+  transition: all 100ms ease-in-out;
+
+  &.active-parent {
+    --background: #333;
+    --color: #EEE;
+  }
+}
+
+ion-list {
+  padding: 0;
+}
+
+ion-menu ion-icon {
+  margin-inline-end: 16px;
+}

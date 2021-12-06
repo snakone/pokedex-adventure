@@ -1,0 +1,26 @@
+<div class="game" 
+      [ngStyle]="{'background-image': 
+      'url('+ 'assets/img/battle/bg/' + location.background + ')'
+      }">  <!-- GAME BACKGROUND -->
+  <ng-container *ngIf="show">
+    <img src="assets/img/models/1-gen/{{pokemon.image}}"
+          class="animated backInRight"
+          [style.transform]="'scale(' + pokemon.scale + ')'"
+          [ngStyle]="{'top': pokemon.spacing || 0}"/>
+        <div class="animated fadeIn types" *ngIf="!playing">  <!-- STATS BAR -->
+          <ion-chip [class]="pokemon.type1">
+            <ion-label>{{pokemon.type1}}</ion-label>
+          </ion-chip>
+          <ion-chip *ngIf="pokemon.type2"
+                    [class]="pokemon.type2">
+            <ion-label>{{pokemon.type2}}</ion-label>
+          </ion-chip>
+
+          <div class="stats">
+            <ion-label color="light">
+              <strong>PC {{pokemon.pc}}</strong>
+            </ion-label>
+          </div>
+        </div>
+  </ng-container>
+</div>

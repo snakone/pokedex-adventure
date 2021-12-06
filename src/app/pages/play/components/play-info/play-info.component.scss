@@ -1,0 +1,30 @@
+.info {
+  text-align: center;
+  background: #dbf4fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+ion-col.show {
+  min-height: 30px;
+  margin-top: 10px;
+  position: relative;
+  top: 2px;
+}
+
+ion-grid {
+  & .region {
+    background: var(--ion-color-warning);
+  }
+
+  & .location {
+    background: var(--ion-color-secondary);
+  }
+}
+
+ion-chip {
+  border: 1px solid rgba(0 , 0, 0, .3);
+  font-weight: bold;
+}

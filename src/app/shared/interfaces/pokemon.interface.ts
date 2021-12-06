@@ -6,6 +6,9 @@ export interface Pokemon {
   type1: string;
   type2?: string | undefined;
   spacing?: string;
+  pc?: number;
+  min: number;
+  max: number;
 }
 
 export interface Pokedex {
