@@ -1,6 +1,6 @@
 .actions {
   display: grid;
-  place-items: center;
+  place-content: center;
   grid-template-columns: repeat(2, 1fr);
   padding: 26px;
   column-gap: 12px;
@@ -13,6 +13,7 @@
     --border-style: solid;
     --border-width: 1px;
     font-weight: bold;
+    margin-bottom: 10px;
   }
 
   & ion-icon {

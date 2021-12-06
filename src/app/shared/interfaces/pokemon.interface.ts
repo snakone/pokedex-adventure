@@ -1,5 +1,6 @@
 export interface Pokemon {
   name: string;
+  pokedex: number;
   rate: number;
   image: string;
   scale: number;
@@ -9,6 +10,8 @@ export interface Pokemon {
   pc?: number;
   min: number;
   max: number;
+  seen?: boolean;
+  catch?: boolean;
 }
 
 export interface Pokedex {

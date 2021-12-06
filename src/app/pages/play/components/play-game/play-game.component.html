@@ -3,7 +3,7 @@
       'url('+ 'assets/img/battle/bg/' + location.background + ')'
       }">  <!-- GAME BACKGROUND -->
   <ng-container *ngIf="show">
-    <img src="assets/img/models/1-gen/{{pokemon.image}}"
+    <img src="assets/img/models/{{pokemon.image}}"
           class="animated backInRight"
           [style.transform]="'scale(' + pokemon.scale + ')'"
           [ngStyle]="{'top': pokemon.spacing || 0}"/>

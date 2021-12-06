@@ -3,6 +3,7 @@ import { Pokedex, Pokemon } from "../interfaces/pokemon.interface";
 const KANTO_ROUTE1_LIST: Pokemon[] = [
   {
     name: 'Pidgey',
+    pokedex: 16,
     rate: 600,
     image: 'Pidgey.gif',
     scale: .6,
@@ -13,6 +14,7 @@ const KANTO_ROUTE1_LIST: Pokemon[] = [
   },
   {
     name: 'Rattata',
+    pokedex: 19,
     rate: 1000,
     image: 'Rattata.gif',
     scale: .5,
@@ -26,6 +28,7 @@ const KANTO_ROUTE2_LIST: Pokemon[] = [
   {
     name: 'Pidgey',
     rate: 600,
+    pokedex: 16,
     image: 'Pidgey.gif',
     scale: .6,
     type1: 'Normal',
@@ -35,6 +38,7 @@ const KANTO_ROUTE2_LIST: Pokemon[] = [
   },
   {
     name: 'Caterpie',
+    pokedex: 10,
     rate: 1000,
     image: 'Caterpie.gif',
     scale: .5,
@@ -47,6 +51,7 @@ const KANTO_ROUTE2_LIST: Pokemon[] = [
 const KANTO_POWER_PLANT_LIST: Pokemon[] = [
   {
     name: 'Voltorb',
+    pokedex: 100,
     rate: 1000,
     image: 'Voltorb.gif',
     scale: .6,
@@ -56,6 +61,7 @@ const KANTO_POWER_PLANT_LIST: Pokemon[] = [
   },
   {
     name: 'Magnemite',
+    pokedex: 81,
     rate: 500,
     image: 'Magnemite.gif',
     scale: .8,
@@ -66,6 +72,7 @@ const KANTO_POWER_PLANT_LIST: Pokemon[] = [
   },
   {
     name: 'Zapdos',
+    pokedex: 145,
     rate: 20,
     image: 'Zapdos.gif',
     scale: 2.2,
@@ -77,27 +84,6 @@ const KANTO_POWER_PLANT_LIST: Pokemon[] = [
   }
 ];
 
-const JOHTO_ROUTE29_LIST: Pokemon[] = [
-  {
-    name: 'Sentret',
-    rate: 1000,
-    image: 'Sentret.gif',
-    scale: .6,
-    type1: 'Normal',
-    min: 33,
-    max: 395
-  },
-  {
-    name: 'Rattata',
-    rate: 200,
-    image: 'Rattata.gif',
-    scale: .6,
-    type1: 'Normal',
-    min: 32,
-    max: 480
-  }
-];
-
 export const DUMMY_POKEDEX: Pokedex[] = [
   {
     region: 'Kanto',
@@ -106,13 +92,7 @@ export const DUMMY_POKEDEX: Pokedex[] = [
       { name: 'Route 2', list: KANTO_ROUTE2_LIST, background: 'field.jpg' },
       { name: 'Power Plant', list: KANTO_POWER_PLANT_LIST, background: 'electric.jpg' }
     ]
-  },
-  // {
-  //   region: 'Johto',
-  //   locations: [
-  //     { name: 'Route 29', list: JOHTO_ROUTE29_LIST, background: 'autumn.png' }
-  //   ]
-  // }
+  }
 ];
 
 

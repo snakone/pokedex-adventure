@@ -5,6 +5,6 @@ export interface LocationMenu {
 }
 
 export interface LocationChange {
-  menu: LocationMenu,
-  location: string
+  menu: LocationMenu;
+  location: string;
 }

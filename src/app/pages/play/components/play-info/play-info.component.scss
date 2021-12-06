@@ -16,11 +16,11 @@ ion-col.show {
 
 ion-grid {
   & .region {
-    background: var(--ion-color-warning);
+    background: var(--ion-color-tertiary-shade);
   }
 
   & .location {
-    background: var(--ion-color-secondary);
+    background: var(--ion-color-primary);
   }
 }
 

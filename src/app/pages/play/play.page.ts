@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { CrafterService } from '@core/services/crafter.service';
+import { ShareRollsComponent } from '@shared/components/modals/share-rolls/share-rolls.component';
 import { LOCATION_MENU } from '@shared/data/menu';
 
 import { DUMMY_POKEDEX } from '@shared/dummy/pokemon.dummy';
-import { LocationChange, LocationMenu } from '@shared/interfaces/menu.interface';
+import { LocationChange } from '@shared/interfaces/menu.interface';
 import { GameLocation, Pokemon } from '@shared/interfaces/pokemon.interface';
 
 @Component({
@@ -27,9 +29,9 @@ export class PlayPage {
   region = 'Kanto'
   runaway = new Audio('assets/sounds/runaway.ogg');
 
-  constructor() {}
+  constructor(private crafter: CrafterService) {}
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.reset(true);
   }
 
@@ -38,27 +40,33 @@ export class PlayPage {
 
     this.playing = true;
     this.show = false;
- 
-    const random = Math.round((Math.random() * 1000));
-
-    this.pokemon = this.closest(random, this.location.list);
-    this.pokemon.pc = Math.floor(Math.random() * 
-                     (this.pokemon.max - this.pokemon.min)) + this.pokemon.min;
-    this.gameList.push(this.pokemon);
     this.rolls--;
+
+    this.pokemon = this.searchPokemon();
 
     setTimeout(() => this.show = true, 100);
 
     setTimeout(() => {
       new Audio('assets/sounds/' + 
                 this.pokemon.name.toLowerCase() + 
-                '.ogg')
-          .play();
+                '.ogg').play();
       this.playing = false;
     }, 666);
   }
 
-  private closest(random: number, list: Pokemon[]): Pokemon {
+  private searchPokemon(): Pokemon {
+    const random = Math.round((Math.random() * 1000));
+    const pokemon = this.closest(random, this.location.list);
+    pokemon.pc = Math.floor(Math.random() * 
+                (pokemon.max - pokemon.min)) + pokemon.min;
+    this.gameList.push({...pokemon});
+    return pokemon;
+  }
+
+  private closest(
+    random: number, 
+    list: Pokemon[]
+  ): Pokemon {
     return list.reduce((a, b) => {
         let aDiff = Math.abs(a.rate - random);
         let bDiff = Math.abs(b.rate - random);
@@ -73,11 +81,21 @@ export class PlayPage {
   }
 
   public changeLocation(change: LocationChange): void {
-    this.region = change.menu.name;
+    if (this.location.name === change.location) { return; }
+
+    this.region = change.menu?.name || 'Kanto';
     this.reset(true);
-    this.location = this.pokedex.filter(p => p.region === change.menu.name)
-                                .map(p => p.locations)[0]
-                                .filter(loc => loc.name === change.location)[0];
+    this.location = this.pokedex
+                     .filter(p => p.region === this.region)
+                     .map(p => p.locations)[0]
+                     .filter(loc => loc.name === change.location)[0];
+
+    setTimeout(async () => {
+      (await 
+        this.crafter.alert(
+          'Location changed to: ' + this.location.name
+      )).present();
+    }, 400);
   }
 
   public doPokeball(): void {
@@ -103,7 +121,7 @@ export class PlayPage {
   }
 
   public share(): void {
-    console.log(this.gameList);
+    this.crafter.modal(ShareRollsComponent, {list: this.gameList});
   }
 
 }

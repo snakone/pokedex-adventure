@@ -1,6 +1,6 @@
 <div class="actions">
   <ion-button shape="round"
-              color="success" 
+              color="warning" 
               (click)="doRoll()"
               [disabled]="rolls <= 0 || playing">
               <ion-icon src="assets/img/icons/refresh.svg" slot="start"></ion-icon>
@@ -14,7 +14,7 @@
               <ion-label>Balls: {{pokeballs}}</ion-label>
   </ion-button>
   <ion-button shape="round"
-              color="danger" 
+              color="success" 
               fill="outline"
               (click)="share()"
               [disabled]="rolls == 10 || playing">
